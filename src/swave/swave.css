@@ -1,0 +1,14 @@
+Screen {
+        layers: sidebar;
+    }
+    Sidebar {
+        width: 30;
+        height: 100%;
+        dock: left;
+        background: blue;
+        layer: sidebar;
+    }
+
+    Sidebar.-hidden { 
+        display:none;
+    }
