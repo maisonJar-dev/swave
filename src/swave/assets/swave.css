@@ -1,18 +1,19 @@
 Screen {
         layers: sidebar;
     }
-    Sidebar {
-        width: 30;
-        height: 100%;
-        dock: left;
-        background: blue;
-        layer: sidebar;
-    }
+Sidebar {
+    width: 30;
+    height: 100%;
+    dock: left;
+    background: blue;
+    layer: sidebar;
+}
 
-    Sidebar.-hidden { 
-        display:none;
-    }
+Sidebar.-hidden { 
+    display:none;
+}
 
-    #audio_list {
-        padding-left: 5;
+#audio_src {
+    height: 1fr;
+    padding-left: 3;
     }

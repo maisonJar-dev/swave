@@ -10,6 +10,9 @@ class AudioEngine:
     def __init__(self):
         self.loopback_index = None
         self._running = True
+        self.magnitudes = np.zeros(CHUNK // 2 + 1)
+        self.rms = 0.0
+        self.device_info = None
 
     #PyAudio is created insdie run() using a with plack so the instance is needed as a parameter
     def _get_default_loopback_index(self, p: pyaudio.PyAudio) -> int:
@@ -39,6 +42,7 @@ class AudioEngine:
             self.loopback_index = self._get_default_loopback_index(p)
 
             dev = p.get_device_info_by_index(self.loopback_index)
+            self.device_info = dev
             rate = int(dev["defaultSampleRate"])
             #Pythonic trick - (Says Claude), is maxInputChannels is 0 or falsy, or 2 kicks in and 
             # defualts to 2, basically java ternary (Yay Java!)
@@ -61,8 +65,11 @@ class AudioEngine:
                     data = stream.read(CHUNK, exception_on_overflow=False)
                     #np.frombuffer() interprets those bytes as a numpy array of 32-bit floats, this shit is RAW DATA BABYYYY
                     x = np.frombuffer(data, dtype=np.float32)
+                    fft = np.fft.rfft(x)
+                    self.magnitudes = np.abs(fft)
                     #RMS (Root Mean Square) is a measure of audio loudness
                     rms = float(np.sqrt(np.mean(x * x))) if x.size else 0.0
+                    self.rms = rms
                     print(f"RMS: {rms:.6f}", end="\r")
 
     def start(self):
