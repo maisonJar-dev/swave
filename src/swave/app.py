@@ -18,7 +18,7 @@ class Sidebar(Container):
 class SwaveApp(App):
     
     BINDINGS = [("d", "toggle_dark", "Toggle Dark Mode")]
-    CSS_PATH = "swave.css"
+    CSS_PATH = "assets/swave.css"
     
     BINDINGS = [
         ("d", "toggle_dark", "Toggle Dark Mode"), 
@@ -47,3 +47,6 @@ class SwaveApp(App):
 if __name__ == "__main__":
     app = SwaveApp()
     app.run()
+
+def main():
+    SwaveApp().run()

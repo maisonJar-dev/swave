@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swave"
+version = "0.1.0"
+description = "Terminal music visualizer"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "textual>=0.50",
+  "sounddevice",
+  "numpy",
+]
+
+[project.scripts]
+swave = "swave.app:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+swave = ["assets/*.css"]
