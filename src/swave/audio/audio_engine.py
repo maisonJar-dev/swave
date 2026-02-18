@@ -65,7 +65,9 @@ class AudioEngine:
                     data = stream.read(CHUNK, exception_on_overflow=False)
                     #np.frombuffer() interprets those bytes as a numpy array of 32-bit floats, this shit is RAW DATA BABYYYY
                     x = np.frombuffer(data, dtype=np.float32)
-                    fft = np.fft.rfft(x)
+                    #Complex Numbers Based on Amplitude and Phase (where it is in time) 
+                    fft = np.fft.rfft(x) 
+                    #Throw away phase, puts us back to floats for Visualization data
                     self.magnitudes = np.abs(fft)
                     #RMS (Root Mean Square) is a measure of audio loudness
                     rms = float(np.sqrt(np.mean(x * x))) if x.size else 0.0

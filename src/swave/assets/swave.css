@@ -13,7 +13,33 @@ Sidebar.-hidden {
     display:none;
 }
 
+.with-border {
+    border: heavy green;
+}
+
 #audio_src {
     height: 1fr;
     padding-left: 3;
     }
+
+.highs_particle {
+    background: #00ffcc;
+    color: #00ffcc;
+    width: 4;
+    height: 4;
+    tint: #00ffcc 60%;
+}
+
+.highs_particle {
+    background: #ff6b00;
+    color: #ff4400;
+    width: 4;
+    height: 4;
+}
+
+.highs_particle {
+    background: #a8d8ff;
+    color: #a8d8ff;
+    width: 4;
+    height: 4;
+}
