@@ -1,6 +1,6 @@
-from textual.app import App, ComposeResult
+from textual.app import App, ComposeResult, Binding
 from textual.widgets import Static, Footer, Header
-from textual.widgets import Log, Button
+from textual.widgets import Log, Label, ListItem, ListView
 from textual.containers import Container
 from textual import work
 from textual import on
@@ -10,25 +10,31 @@ import numpy as np
 
 class Sidebar(Container):
     def compose(self) -> ComposeResult:
-        yield Log()
+        yield Label("AUDIO SOURCE")
+        yield ListView(
+            ListItem(Label("System Audio"), id="sys_audio"),
+            ListItem(Label("Microphone"), id="mic"),
+            id="audio_list"
+        )
 
     def log_to_sidebar(self, msg:str) -> None: 
         self.query_one(Log).write_line(msg)
 
+    def on_mount(self) -> None: 
+        #At the moment System Audio is focus so let user see that is what is set
+        self.query_one("#audio_list", ListView).index = 0
+
 class SwaveApp(App):
     
-    BINDINGS = [("d", "toggle_dark", "Toggle Dark Mode")]
     CSS_PATH = "assets/swave.css"
     
     BINDINGS = [
-        ("d", "toggle_dark", "Toggle Dark Mode"), 
-        ("ctrl+s", "toggle_sidebar")]
+        Binding("d", "toggle_dark", "Toggle Dark Mode"), 
+        Binding("ctrl+s", "toggle_sidebar")]
 
     def compose(self) -> ComposeResult:
         yield Header()
         yield Sidebar(classes="-hidden")
-        yield Button.success("Yes!")
-        yield Button.error("No...")
         yield Footer()
     
     def action_toggle_dark(self) -> None:
@@ -38,10 +44,6 @@ class SwaveApp(App):
 
     def action_toggle_sidebar(self) -> None:
         self.query_one(Sidebar).toggle_class("-hidden")
-
-    @on(Button.Pressed)
-    def log_button_press(self, event: Button.Pressed) -> None:
-        self.query_one(Sidebar).log_to_sidebar(str(event.button.label))
 
     
 if __name__ == "__main__":

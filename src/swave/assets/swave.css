@@ -12,3 +12,7 @@ Screen {
     Sidebar.-hidden { 
         display:none;
     }
+
+    #audio_list {
+        padding-left: 5;
+    }
