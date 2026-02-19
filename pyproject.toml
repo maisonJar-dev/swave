@@ -1,30 +1,21 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "swave"
-version = "0.1.1"
-description = "Terminal audio visualizer built with Textual"
+version = "0.1.0"
+description = "A terminal audio visualizer for Windows"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
-authors = [{ name = "Maison Gulyas" }]
-
 dependencies = [
-  "textual>=0.60.0",
-  "rich>=13.0.0",
-  "numpy>=1.24.0"
+    "textual",
+    "pyaudiowpatch",
+    "numpy",
 ]
 
 [project.scripts]
 swave = "swave.app:main"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.package-data]
-swave = ["assets/*.css"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/swave"]

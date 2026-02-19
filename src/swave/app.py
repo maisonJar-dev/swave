@@ -161,9 +161,8 @@ class SwaveApp(App):
     def action_toggle_sidebar(self) -> None:
         self.query_one(Sidebar).toggle_class("-hidden")
 
-
-if __name__ == "__main__":
-    SwaveApp().run()
-
 def main():
     SwaveApp().run()
+
+if __name__ == "__main__":
+    main()  # just call main() here instead of duplicating
