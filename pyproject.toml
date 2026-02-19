@@ -1,18 +1,20 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "swave"
-version = "0.1.0"
-description = "Terminal music visualizer"
+version = "0.1.1"
+description = "Terminal audio visualizer built with Textual"
 readme = "README.md"
 requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Maison Gulyas" }]
+
 dependencies = [
-  "textual>=0.50",
-  "sounddevice",
-  "PyAudioWPatch",
-  "numpy",
+  "textual>=0.60.0",
+  "rich>=13.0.0",
+  "numpy>=1.24.0"
 ]
 
 [project.scripts]
@@ -20,6 +22,9 @@ swave = "swave.app:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.setuptools.package-data]
 swave = ["assets/*.css"]
