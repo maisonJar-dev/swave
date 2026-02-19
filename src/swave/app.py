@@ -1,4 +1,7 @@
-from audio.audio_engine import AudioEngine
+try:
+    from .audio.audio_engine import AudioEngine  # when installed as package
+except ImportError:
+    from audio.audio_engine import AudioEngine   # when running locally from VS Code
 from textual.app import App, ComposeResult, Binding
 from textual.widgets import Footer, Header, Label
 from textual.widgets import Static
